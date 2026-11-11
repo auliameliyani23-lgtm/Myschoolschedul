@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Sekolah</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>🎀 My School Schedule</h1>
+    <p>Jadwal Pelajaran Sekolahku</p>
+</header>
+
+<main>
+    <div class="today">
+        <h2 id="tanggal"></h2>
+        <p>Semangat belajar hari ini! 💗</p>
+    </div>
+
+    <h2>📚 Pilih Hari</h2>
+    <div class="days">
+        <button onclick="pilihHari('Senin')">Senin</button>
+        <button onclick="pilihHari('Selasa')">Selasa</button>
+        <button onclick="pilihHari('Rabu')">Rabu</button>
+        <button onclick="pilihHari('Kamis')">Kamis</button>
+        <button onclick="pilihHari('Jumat')">Jumat</button>
+        <button onclick="pilihHari('Sabtu')">Sabtu</button>
+    </div>
+
+    <h2 id="judulHari">Jadwal Pelajaran</h2>
+    <div id="daftarJadwal"></div>
+
+    <div class="form-box">
+        <h2>➕ Tambah Jadwal</h2>
+
+        <label>Hari</label>
+        <select id="hari">
+            <option>Senin</option>
+            <option>Selasa</option>
+            <option>Rabu</option>
+            <option>Kamis</option>
+            <option>Jumat</option>
+            <option>Sabtu</option>
+        </select>
+
+        <label>Mata Pelajaran</label>
+        <input type="text" id="mapel"
+               placeholder="Contoh: Matematika">
+
+        <label>Jam Mulai</label>
+        <input type="time" id="mulai">
+
+        <label>Jam Selesai</label>
+        <input type="time" id="selesai">
+
+        <label>Nama Guru</label>
+        <input type="text" id="guru"
+               placeholder="Nama guru">
+
+        <button class="add-btn" onclick="tambahJadwal()">
+            Simpan Jadwal 💗
+        </button>
+    </div>
+</main>
+
+<footer>
+    <p>Made with 💗 | My School Schedule</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Hello, World!</title>
+</head>
+<body>
+  <h1>
+    Hello, World!
+  </h1>
+</body>
+</html>
