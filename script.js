@@ -1,162 +1,145 @@
 
-// DATA JADWAL
-let jadwal = JSON.parse(localStorage.getItem("jadwalSekolah")) || {
-    Senin: [
-        {mapel:"Matematika", mulai:"07:00", selesai:"08:30", guru:"Bu Rina"},
-        {mapel:"Bahasa Indonesia", mulai:"08:30", selesai:"10:00", guru:"Pak Andi"},
-        {mapel:"Bahasa Inggris", mulai:"10:15", selesai:"11:45", guru:"Bu Sari"}
-    ],
-    Selasa: [
-        {mapel:"Biologi", mulai:"07:00", selesai:"08:30", guru:"Bu Dewi"},
-        {mapel:"Sejarah", mulai:"08:30", selesai:"10:00", guru:"Pak Budi"}
-    ],
-    Rabu: [
-        {mapel:"Kimia", mulai:"07:00", selesai:"08:30", guru:"Bu Lina"}
-    ],
-    Kamis: [
-        {mapel:"Fisika", mulai:"07:00", selesai:"08:30", guru:"Pak Dedi"}
-    ],
-    Jumat: [
-        {mapel:"Agama", mulai:"07:00", selesai:"08:30", guru:"Bu Siti"}
-    ],
-    Sabtu: [
-        {mapel:"Olahraga", mulai:"07:00", selesai:"08:30", guru:"Pak Agus"}
-    ]
-};
-
-let hariAktif = "Senin";
-
-// SIMPAN DATA
-function simpanData() {
-    localStorage.setItem(
-        "jadwalSekolah",
-        JSON.stringify(jadwal)
-    );
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// TANGGAL HARI INI
-const namaHari = [
-    "Minggu", "Senin", "Selasa",
-    "Rabu", "Kamis", "Jumat", "Sabtu"
-];
-
-function tampilTanggal() {
-    const sekarang = new Date();
-
-    document.getElementById("tanggal").innerText =
-        namaHari[sekarang.getDay()] + ", " +
-        sekarang.toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        });
+body {
+    font-family: Arial, sans-serif;
+    background: #fff0f6;
+    color: #713b56;
 }
 
-// PILIH HARI
-function pilihHari(hari) {
-    hariAktif = hari;
-    tampilJadwal();
+header {
+    background: linear-gradient(135deg, #f58bb8, #e86a9f);
+    color: white;
+    text-align: center;
+    padding: 35px 10px;
 }
 
-// TAMPILKAN JADWAL
-function tampilJadwal() {
-    const daftar = document.getElementById("daftarJadwal");
+header h1 {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
 
-    document.getElementById("judulHari").innerText =
-        "Jadwal Hari " + hariAktif;
+main {
+    max-width: 750px;
+    margin: 25px auto;
+    padding: 15px;
+}
 
-    daftar.innerHTML = "";
+.today {
+    background: white;
+    padding: 22px;
+    border-radius: 18px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px #edc4d5;
+}
 
-    const data = jadwal[hariAktif] || [];
+.today h2 {
+    color: #e45b97;
+    margin-bottom: 10px;
+}
 
-    if (data.length === 0) {
-        daftar.innerHTML =
-            "<p>Belum ada jadwal pelajaran 💗</p>";
-        return;
+h2 {
+    margin: 20px 0 15px;
+    color: #d94d8c;
+}
+
+.days {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+button {
+    border: none;
+    background: #f28bb7;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #d94d8c;
+}
+
+.schedule {
+    background: white;
+    border-left: 5px solid #ed82ad;
+    padding: 18px;
+    border-radius: 13px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 7px #edc4d5;
+}
+
+.schedule h3 {
+    color: #dc5994;
+    margin-bottom: 8px;
+}
+
+.schedule p {
+    margin: 5px 0;
+}
+
+.delete-btn {
+    background: #e45b6f;
+    margin-top: 10px;
+    padding: 8px 12px;
+}
+
+.form-box {
+    background: white;
+    padding: 22px;
+    margin-top: 30px;
+    border-radius: 18px;
+    box-shadow: 0 3px 10px #edc4d5;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #f2b5ce;
+    border-radius: 10px;
+    outline: none;
+    background: #fff8fb;
+}
+
+.add-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    font-size: 15px;
+}
+
+footer {
+    background: #f58bb8;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 35px;
+}
+
+@media(max-width: 600px) {
+    header h1 {
+        font-size: 22px;
     }
 
-    data.forEach((item, index) => {
-        daftar.innerHTML += `
-            <div class="schedule">
-                <h3>📖 ${item.mapel}</h3>
-                <p>⏰ ${item.mulai} - ${item.selesai}</p>
-                <p>👩‍🏫 Guru: ${item.guru}</p>
-                <button class="delete-btn"
-                    onclick="hapusJadwal(${index})">
-                    Hapus
-                </button>
-            </div>
-        `;
-    });
-}
-
-// TAMBAH JADWAL
-function tambahJadwal() {
-    const hari = document.getElementById("hari").value;
-    const mapel = document.getElementById("mapel").value.trim();
-    const mulai = document.getElementById("mulai").value;
-    const selesai = document.getElementById("selesai").value;
-    const guru = document.getElementById("guru").value.trim();
-
-    if (!mapel || !mulai || !selesai || !guru) {
-        alert("Lengkapi semua data terlebih dahulu!");
-        return;
-    }
-
-    if (mulai >= selesai) {
-        alert("Jam selesai harus setelah jam mulai!");
-        return;
-    }
-
-    if (!jadwal[hari]) {
-        jadwal[hari] = [];
-    }
-
-    jadwal[hari].push({
-        mapel,
-        mulai,
-        selesai,
-        guru
-    });
-
-    jadwal[hari].sort((a, b) =>
-        a.mulai.localeCompare(b.mulai)
-    );
-
-    simpanData();
-
-    document.getElementById("mapel").value = "";
-    document.getElementById("mulai").value = "";
-    document.getElementById("selesai").value = "";
-    document.getElementById("guru").value = "";
-
-    hariAktif = hari;
-    document.getElementById("hari").value = hari;
-
-    tampilJadwal();
-
-    alert("Jadwal berhasil ditambahkan! 💗");
-}
-
-// HAPUS JADWAL
-function hapusJadwal(index) {
-    if (confirm("Yakin ingin menghapus jadwal ini?")) {
-        jadwal[hariAktif].splice(index, 1);
-        simpanData();
-        tampilJadwal();
+    .days button {
+        flex: 1 1 25%;
     }
 }
 
-// MULAI APLIKASI
-tampilTanggal();
-
-const hariSekarang = namaHari[new Date().getDay()];
-
-if (jadwal[hariSekarang]) {
-    hariAktif = hariSekarang;
-    document.getElementById("hari").value = hariSekarang;
-}
-
-tampilJadwal();
-
-
+    
